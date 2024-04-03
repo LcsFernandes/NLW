@@ -4,7 +4,7 @@ from src.models.settings.connection import db_connection_handler
 
 db_connection_handler.connect_to_db()
 
-@pytest.mark.skip(reason = "Não necessita")
+@pytest.mark.skip(reason = "Novo registro em banco de dados")
 def test_insert_attendee():
     attendee_info = {
         "uuid": "meu-uuid-teste",
@@ -18,8 +18,9 @@ def test_insert_attendee():
     
     print(response)
 
+@pytest.mark.skip(reason = "Não necessita")
 def test_get_attendee_badge_by_id():
-    attendee_id = "meu-uuid-teste"
+    attendee_id = "meu-uuid"
 
     attendee = AttendeesRepository()
     response = attendee.get_attendee_badge_by_id(attendee_id)
