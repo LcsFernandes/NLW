@@ -18,9 +18,10 @@ def test_insert_event():
     print(response)
 
 @pytest.mark.skip(reason = "Não necessita")
-def test_get_event_by_id():
+def test_get_attendee_badge_by_id():
     event_id = "uuid-teste"
     events_repository = EventsRepository()
     response = events_repository.get_event_by_id(event_id)
     
     print(response)
+    
