@@ -1,9 +1,10 @@
 from src.models.settings.connection import db_connection_handler
 from src.models.entities.attendees import Attendees
 from src.models.entities.events import Events
+from src.models.entities.check_ins import CheckIns
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
-from typing import Dict
+from typing import Dict, List
 
 class AttendeesRepository:
     def insert_attendee(self, attendee_info: Dict) -> Dict:
@@ -47,4 +48,20 @@ class AttendeesRepository:
             except NoResultFound:
                 return None
 
-                
+    def get_attendees_by_event_id(self, event_id: str) -> List[Attendees]:
+        with db_connection_handler as db:
+            attendees = (
+                db.session
+                .query(Attendees)
+                .outerjoin(CheckIns, CheckIns.attendeeId == Attendees.id)
+                .filter(Attendees.event_id == event_id)
+                .with_entities(
+                    Attendees.id,
+                    Attendees.name,
+                    Attendees.email,
+                    CheckIns.created_at.label('checkInAt'),
+                    Attendees.created_at.label('createdAt')
+                )
+                .all()
+            )
+            return attendees
