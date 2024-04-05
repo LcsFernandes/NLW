@@ -1,5 +1,3 @@
-# Projeto Pass.in Nlw Rocketseat
-
 # Especificações
 
 # pass.in
