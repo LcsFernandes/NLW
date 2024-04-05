@@ -33,7 +33,7 @@ class AttendeesRepository:
                 attendee = (
                     db.session
                     .query(Attendees)
-                    #.join(Events, Events.id == Attendees.event_id)
+                    .join(Events, Events.id == Attendees.event_id)
                     .filter(Attendees.id == attendee_id)
                     .with_entities(
                         Attendees.name,

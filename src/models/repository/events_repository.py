@@ -56,7 +56,7 @@ class EventsRepository:
                     .all()
                 )
                 if not len(event_count):
-                    return {"maximum_attendees": 0,
+                    return {"maximumAttendees": 0,
                             "attendeesAmount": 0
                         }    
                 return {"maximumAttendees": event_count[0].maximum_attendees,
